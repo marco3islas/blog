@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Blog de Marco en Red</title>
+</head>
+<body>
+
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<div class="grid-container">
+		<header class="item1 celda">
+			<h1><a href="{% url 'index' %}" >MarcoEnRed</a></h1>
+			<nav>
+				<ul>
+					<li><a href="/galeria">galeria</a></li>
+					<li><a href="/about">about</a></li>
+					<li><a href="/contacto">contacto</a></li>
+				</ul>
+			</nav>
+		</header>
+	{% block content %}
+
+	{% endblock content%}
+	<footer class="item6 celda footer">
+			<nav>
+				<ul>
+					<li><a href="/galeria">galeria</a></li>
+					<li><a href="/about">about</a></li>
+					<li><a href="/contacto">contacto</a></li>
+				</ul>
+			</nav>
+			<p>
+			&copy Marco A. Islas Duran.
+			</p>
+	</footer>
+</body>
+</html>

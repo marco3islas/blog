@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="detailContainer blogContent">
+	<h1>{{ article.title }}</h1>
+
+	<img class="imagenArticulo" src="{{ article.image.url }}" alt="{{ article.title }}">
+
+	<h3>{{ article.subtitulo }}</h3>
+
+	<h4>{{ article.resumen }}</h4>
+
+	<div>{{ article.article|safe}}</div>
+</div>
+
+{% endblock %}

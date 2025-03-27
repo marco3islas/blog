@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="galeria">
+  {% for imagen in imagenes %}
+  <div class="itemGaleria">
+  <img class="imagenGaleria" src="{{imagen.image.url}}" alt="{{imagen.title}}">
+  <span>{{imagen.title}}</span>
+  </div>
+  {% endfor %}
+  
+</div>
+
+	{% endblock %}	
+	</html>
