@@ -1,6 +1,8 @@
 #  Blog
 
-* Esta es una aplicación de blog, tiene un Admin para que sirve para controlar el contenido, así como los usuarios. 
+* Esta es una aplicación de blog, en la que voy publicando articulos de mi interes. sobre tecnologías, como: Angular, React, Python, etc. 
+* Aprovechando la tecnología de Django, que ofrece un framework completo para el desarrollo de aplicaciones web. 
+*Ademas de un apartado Administrativo, para el control de los usuarios y el contenido del blog. 
     * **Usuarios:** Controla y gestiona los usuarios del blog.
     * ✍️ **Contenido:** Administra las publicaciones, categorías y otros contenidos del blog.
 
@@ -23,4 +25,14 @@ Ejecuta `django-admin startproject 'nombre del sitio'` para crear un nuevo proye
 
 Ejecuta `python3 miapp runserver` para iniciar el servidor de desarrollo.
 
+##  Autor:
+
 **Autor:** Marco Antonio Islas
+
+**Contacto:** marco.islas@gmail.com
+
+**Redes Sociales:** 
+
+* [LinkedIn](https://www.linkedin.com/in/marco3islas/)
+* [GitHub](https://github.com/marco3islas)
+* [Gmail](mailto:marco3islas@gmail.com)
