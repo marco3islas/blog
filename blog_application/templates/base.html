@@ -1,19 +1,15 @@
 <!DOCTYPE html>
+	{% load static %}
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	{% load static %}
   <link rel="icon" type="imagen/x-icon" href='{% static 'images/notas.png' %}'>
   <title>Blog de Marco en Red</title>
-
+	<link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
 
-	{% load static %}
-	<link rel="stylesheet" href="{% static 'styles.css' %}">
-	{% load static %}
-	<link rel="stylesheet" href="{% static 'styles.css' %}">
 	<div class="grid-container">
 		<header class="item1 celda">
 			<h1><a href="{% url 'index' %}" >MarcoEnRed</a></h1>

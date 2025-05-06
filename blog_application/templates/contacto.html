@@ -1,7 +1,9 @@
 
 {% extends 'base.html' %}
 {% block content %}
-<form method="post">
+<h1 class="contactoHead">Envia algún comentario o sugerencia.</h1>
+<form method="post" class="formulario">
+  <div class='formContainer'>
     {% csrf_token %}
   <label for="id_name">Nombre:</label>
     {{ form.name }}
@@ -13,6 +15,7 @@
     {{ form.message }}
 
     <button type="submit">Enviar</button>
+    </div>
 </form>
 {%endblock%}
 </html>

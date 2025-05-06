@@ -27,12 +27,14 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-v3o8%($pk!+m%sg#eo-6wo%cllgz3tafajrkq^s%r!1o+rt!6f')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+def is_running_railway():
+    return 'RAILWAY' in os.environ
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true' and not is_running_railway()
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS','').split(',')if not is_running_railway() else ['*']
 
 
 # Application definition
@@ -81,10 +83,28 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-}
+# Detectar si es railway o local
+if os.getenv("RAILWAY_ENVIRONMENT"):
+    DATABASES = {
+        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    }
+else: 
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'myblog',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR/'db.sqlite3'
+        }
+    }
 
 
 # Password validation
@@ -122,6 +142,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "blog_application/static/",
+]
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
