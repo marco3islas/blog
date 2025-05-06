@@ -3,10 +3,16 @@ from django.views import generic
 from django.shortcuts import render
 from . models import Article
 from . forms import ApplicationForm
+from random import choice
 
 def index(request):
     articles = Article.objects.all()
-    return render(request, "index.html", {"articles": articles})
+    random_article = choice(articles) if articles else None
+    context = {
+        'articles': articles,
+        'random_article': random_article
+    }
+    return render(request, "index.html", context)
 
 def about(request):
     return render(request, "about.html")

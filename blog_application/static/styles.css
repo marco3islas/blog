@@ -12,7 +12,7 @@
 }
 
 body {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Helvetica, sans-serif;
 	background-color: var(--fondo);
 }
 
@@ -21,12 +21,33 @@ body {
 }
 
 .item2 {
-	grid-area: hero;
-	background-image: linear-gradient(45deg, dodgerblue, var(--destacados));
-	display: flex;
-	justify-content: space-around;
-	padding: 20px;
-	align-items: center;
+    grid-area: hero;
+    /* Gradiente con más colores para la transición */
+    background-image: linear-gradient(
+        45deg,
+        dodgerblue,
+        var(--destacados),
+        var(--acentos),
+        white
+    );
+    background-size: 400%; /* Aumenta el tamaño del gradiente */
+    animation: gradient-transition 10s ease-in-out infinite;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    align-items: center;
+}
+
+@keyframes gradient-transition {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .item3 {
@@ -188,7 +209,7 @@ p {
   height: 70vh;
 }
 .temasFavoritos li{
-  list-style: square; !important;
+  list-style: square !important;
   padding: 5px 1px;
 }
 /*Galeria*/
@@ -228,7 +249,7 @@ p {
 
 .formulario {
   grid-area: main;
-  background-color: #c6da6a;
+  background-color: #121212;
 }
 .formContainer {
   margin: 0 auto;
@@ -236,6 +257,11 @@ p {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.formContainer label {
+  color: white;
+  font-weight: bold;
 }
 
 .formContainer input[type="text"],

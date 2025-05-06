@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 <div class="hero item2">
 
 	<div class="texto">
+		{% if random_article %}
+		<h1> <a href="{% url 'article_detail' random_article.id %}">{{ random_article.title }}</a></h1>
+		<p>{{ random_article.resumen }}</p>
+		{% else %}
 		<h1>Blog de Marco en Red</h1>
 		<p>Angular, React y Python</p>
+		{% endif %}
 	</div>
 
-	{% load static %}
+	{% if random_article %}
+	<img class="heroImage" src="{{ random_article.image.url }}" alt="{{ random_article.title }}">
+	{% else %}
 	<img class="heroImage" src="{% static 'images/un_anuncio_sobre_un_teclado_de_computadora3.jpeg' %}" alt="Un teclado">
+	{% endif %}
 
 </div>
 <div class="item3"></div>
