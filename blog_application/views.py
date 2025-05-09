@@ -21,6 +21,16 @@ def galeria(request):
     images = Article.objects.exclude(image="").order_by('-fecha')
     return render(request, "galeria.html", {"imagenes": images})
 
+def derecha_component(request):
+    images = [
+        'images/un_anuncio_sobre_zapatos_deportivos3.webp',
+        'images/ranas_blackjack.webp',
+        'images/cafeteria.webp',
+        'images/project_automator.webp',
+        'images/images_convert.webp'
+    ]
+    return render(request, "derecha_component.html", {"imagenes":images})
+
 def contacto(request):
     if request.method == "Post":
         form = ApplicationForm(request.POST)

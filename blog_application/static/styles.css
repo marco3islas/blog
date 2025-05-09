@@ -212,6 +212,23 @@ p {
   list-style: square !important;
   padding: 5px 1px;
 }
+
+.anuncios_derecha {
+  grid-column: 4/5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* .anuncios_derecha */
+.anuncios_derecha .imagenanuncio {
+  max-width: 200px;
+  width: 100%;
+  border-radius: 8px;
+} 
+
+
+
 /*Galeria*/
 
 .galeria {
@@ -250,6 +267,8 @@ p {
 .formulario {
   grid-area: main;
   background-color: #121212;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 .formContainer {
   margin: 0 auto;
