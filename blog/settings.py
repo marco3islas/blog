@@ -10,16 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-import dj_database_url
 import os
+import dj_database_url
+from decouple import config
 from pathlib import Path
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Load environment variables from .env file
-load_dotenv(BASE_DIR / '.env')
 
 
 
@@ -27,14 +24,14 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 def is_running_railway():
-    return 'RAILWAY' in os.environ
+    return os.getenv('RAILWAY_ENVIRONMENT') is not None
 
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true' and not is_running_railway()
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS','').split(',')if not is_running_railway() else ['*']
+DEBUG = config('DEBUG', cast=bool, default=True)and not is_running_railway()
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost, 127.0.0.1').split(',') if not is_running_railway() else ['caboose.proxy.rlwy.net']
 
 
 # Application definition
@@ -84,27 +81,23 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 # Detectar si es railway o local
-if os.getenv("RAILWAY_ENVIRONMENT"):
-    DATABASES = {
-        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-    }
-else: 
-#     DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'myblog',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+# Migrar SQLite a PosreSQL en Railway
+
+if config('USE_SQLITE', default='False').lower() == 'true':
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR/'db.sqlite3'
+            'ENGINE':'django.db.backends.sqlite3',
+            'NAME': BASE_DIR/'db.sqlite3',
         }
     }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+                default=config('DATABASE_URL'),
+                conn_max_age=600,
+                ssl_require=is_running_railway()
+            )
+        }
 
 
 # Password validation
