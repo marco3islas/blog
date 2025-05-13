@@ -42,7 +42,9 @@ def is_running_railway():
     return os.getenv('RAILWAY_ENVIRONMENT') is not None
 
 DEBUG = config('DEBUG', cast=bool, default=True)and not is_running_railway()
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost, 127.0.0.1').split(',') if not is_running_railway() else ['myblog-marco.up.railway.app/']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',') if not is_running_railway() else ['myblog-marco.up.railway.app']
+
+
 
 
 # Application definition
