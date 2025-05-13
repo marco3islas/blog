@@ -92,12 +92,15 @@ if config('USE_SQLITE', default='False').lower() == 'true':
     }
 else:
     DATABASES = {
-        'default': dj_database_url.config(
-                default=config('DATABASE_URL'),
-                conn_max_age=600,
-                ssl_require=is_running_railway()
-            )
+        'default':{
+            'ENGINE':'django.db.backends.postgresql',
+            'NAME':config('DB_NAME'),
+            'USER':config('DB_USER'),
+            'PASSWORD':config('DB_PASSWORD'),
+            'HOST':config('DB_HOST'),
+            'PORT':config('DB_PORT')
         }
+    }
 
 
 # Password validation
