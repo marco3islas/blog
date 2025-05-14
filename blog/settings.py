@@ -24,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DATABASES = {
     'default': {
@@ -42,6 +41,8 @@ def is_running_railway():
     return os.getenv('RAILWAY_ENVIRONMENT') is not None
 
 DEBUG = config('DEBUG', cast=bool, default=True)and not is_running_railway()
+
+SECRET_KEY = config('SECRET_KEY') if not is_running_railway() else os.getenv('SECRET_KEY')
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost, 127.0.0.1').split(',') if not is_running_railway() else ['myblog-marco.up.railway.app']
 
 
@@ -61,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
