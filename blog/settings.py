@@ -42,8 +42,7 @@ def is_running_railway():
     return os.getenv('RAILWAY_ENVIRONMENT') is not None
 
 DEBUG = config('DEBUG', cast=bool, default=True)and not is_running_railway()
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',') if not is_running_railway() else ['myblog-marco.up.railway.app']
-
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost, 127.0.0.1').split(',') if not is_running_railway() else ['myblog-marco.up.railway.app/']
 
 
 
@@ -63,6 +62,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhitenoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
