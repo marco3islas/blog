@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-	{% load static %}
+{% load static %}
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="imagen/x-icon" href='{% static 'images/notas.png' %}'>
+  <link rel="icon" type="imagen/x-icon" href="{% static 'images/notas.png' %}">
   <title>Blog de Marco en Red</title>
 	<link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
@@ -21,6 +21,7 @@
 				</ul>
 			</nav>
 		</header>
+  </div>
 	{% block content %}
 
 	{% endblock content%}
@@ -33,7 +34,7 @@
 				</ul>
 			</nav>
 			<p>
-			&copy Marco A. Islas Duran.
+			&copy; Marco A. Islas Duran.
 			</p>
 	</footer>
 </body>
