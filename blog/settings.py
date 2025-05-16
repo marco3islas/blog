@@ -45,6 +45,10 @@ DEBUG = config('DEBUG', cast=bool, default=True)and not is_running_railway()
 SECRET_KEY = config('SECRET_KEY') if not is_running_railway() else os.getenv('SECRET_KEY')
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost, 127.0.0.1').split(',') if not is_running_railway() else ['myblog-marco.up.railway.app']
 
+# Agregar  dominio a la lista
+CSRF_TRUSTED_ORIGINS = [
+    'https://myblog-marco.up.railway.app',
+]
 
 
 # Application definition
