@@ -164,13 +164,13 @@ AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='us-east-1')
 AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN')
 
-# Configura S3 como almacenamiento para archivos media
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
 # Configuracion de archivos estáticos y media en S3
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None  # O ajusta según tus necesidades
 AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+# Configura S3 como almacenamiento para archivos media
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # URL para archivos media en S3
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
