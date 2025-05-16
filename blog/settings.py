@@ -157,6 +157,25 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
+# Configuraciones para AWS S3
+AWS_ACCESS_KEY_ID = config('AWS_KEY_ACCES')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCES_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='us-east-1')
+AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN')
+
+# Configura S3 como almacenamiento para archivos media
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Configuracion de archivos estáticos y media en S3
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None  # O ajusta según tus necesidades
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+# URL para archivos media en S3
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Opcional, para compatibilidad local
+
 # Configuración de Whitenoise para archivos estáticos
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # CKEDITOR 5 config
